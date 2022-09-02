@@ -13,9 +13,13 @@ public class SocketRunnable implements Runnable {
     @Override
     public void run() {
         MessageInputService serverReader = new MessageInputServiceImpl(socket.getInputStream());
-
+        String message;
         while (true) {
-            System.out.println(serverReader.getMessage());
+
+            if ((message = serverReader.getMessage()) != null) {
+            System.out.println(message);
+            }
+
         }
 
     }
