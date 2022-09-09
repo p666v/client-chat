@@ -31,8 +31,6 @@ public class ClientServiceImpl implements ClientService {
                 if (consoleMessage.equals("!Exit!")) {
                     System.exit(0);
                 }
-
-
             }
         }
     }

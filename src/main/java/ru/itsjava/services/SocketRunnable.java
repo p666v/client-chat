@@ -15,7 +15,6 @@ public class SocketRunnable implements Runnable {
         MessageInputService serverReader = new MessageInputServiceImpl(socket.getInputStream());
         String message;
         while (true) {
-
             if ((message = serverReader.getMessage()) != null) {
             System.out.println(message);
             }

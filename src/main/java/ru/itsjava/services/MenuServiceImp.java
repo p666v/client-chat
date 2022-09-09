@@ -16,17 +16,39 @@ public class MenuServiceImp implements MenuService {
     @Override
     public void menu() {
         System.out.println("Меню:\n" +
-                "1. Авторизация\n" +
-                "2. Регистрация\n" +
-                "0. Выход\n");
+                "0. Выход\n" +
+                "1. Регистрация\n" +
+                "2. Авторизация\n");
     }
 
     @Override
     public void printMenu() {
         menu();
         switch (messageInputService.getMessage()) {
+            case "0": {
+                System.out.println("Вы покидаете чат");
+                serverWriter.println("!Exit!");
+                serverWriter.flush();
+                serverWriter.close();
+                System.exit(0);
+                break;
+            }
             case "1": {
-                System.out.println("ВЫ ВЫБРАЛИ АВТОРИЗАЦИЮ");
+                System.out.println("РЕГИСТРАЦИЯ");
+
+                System.out.println("Придумайте свой логин:");
+                String login = messageInputService.getMessage();
+
+                System.out.println("Придумайте свой пароль:");
+                String password = messageInputService.getMessage();
+
+                serverWriter.println("!Registration!" + login + ":" + password);
+                serverWriter.flush();
+                printMenu();
+                break;
+            }
+            case "2": {
+                System.out.println("АВТОРИЗАЦИЯ");
 
                 System.out.println("Введите свой логин:");
                 String login = messageInputService.getMessage();
@@ -38,30 +60,9 @@ public class MenuServiceImp implements MenuService {
                 serverWriter.flush();
                 break;
             }
-            case "2": {
-                System.out.println("ВЫ ВЫБРАЛИ РЕГИСТРАЦИЮ");
-
-                System.out.println("Придумайте свой логин:");
-                String login = messageInputService.getMessage();
-
-                System.out.println("Придумайте свой пароль:");
-                String password = messageInputService.getMessage();
-
-                serverWriter.println("!Registration!" + login + ":" + password);
-                serverWriter.flush();
-                break;
-            }
-            case "0": {
-                System.out.println("Вы покидаете чат");
-                serverWriter.println("!Exit!");
-                serverWriter.flush();
-                serverWriter.close();
-                System.exit(0);
-
-                break;
-            }
 
         }
+
     }
 
 }
